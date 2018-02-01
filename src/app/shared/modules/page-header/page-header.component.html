@@ -1,0 +1,21 @@
+<div class="row">
+    
+        <div class=" col-md-12">
+            <h2 class="page-header col-xl-6 col-md-6 float-left">
+                {{heading}}
+            </h2>
+            <select class="form-control  col-md-6 float-right" #selectElem (change)="setNewUser(selectElem.value)">
+                    <option *ngFor="let user of lUsers" [value]="user.STUDENT_MST_ID">
+                            {{user.STUDENT_NAME}}
+                    </option>
+            </select>
+        </div>
+       
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"><i class="fa {{icon}}"></i> {{heading}}</li>
+        </ol>
+    
+</div>

@@ -1,0 +1,130 @@
+<div [@routerTransition]>
+    <app-page-header (childEvent)="test(message)" [heading]="'TimeTable'" [icon]="'fa-table'"></app-page-header>
+    
+    
+        <div class="card mb-3" style="width:100%;">
+            <div class="card-header table-responsive"> Class: {{stuData.CLASS_NAME}}&nbsp;&nbsp;/&nbsp;&nbsp;Division: {{stuData.DIVISION_NAME}}</div>
+           <!--Below table for horizontal period per day with teacher's name -->
+            <!--<table class="card-body table table-bordered">
+                <thead class="card-header bg-secondary">
+                    <tr>
+                        <th>#</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <ng-container *ngFor="let data of tableData">
+                    <tbody *ngIf="data.PERIOD_NO != '';else not_true">
+                        <tr>
+                            <td rowspan=2 class="table-body time">{{data.PERIOD_NO}}<br>{{data.PERIOD_DURATION}}</td>
+                            <td class="table-body" >{{data.MON_SUB}}</td>
+                            <td class="table-body">{{data.THU_SUB}}</td>
+                            <td class="table-body">{{data.WED_SUB}}</td>
+                            <td class="table-body">{{data.THU_SUB}}</td>
+                            <td class="table-body">{{data.FRI_SUB}}</td>
+                            <td class="table-body">{{data.SAT_SUB}}</td>
+                        </tr>
+                        <tr class="teacherTr" >
+                            <td class="table-body">{{data.MON_TCH}}</td>
+                            <td class="table-body">{{data.THU_TCH}}</td>
+                            <td class="table-body">{{data.WED_TCH}}</td>
+                            <td class="table-body">{{data.THU_TCH}}</td>
+                            <td class="table-body">{{data.FRI_TCH}}</td>
+                            <td class="table-body">{{data.SAT_TCH}}</td>
+                        </tr>
+                 
+                    </tbody>
+                    <ng-template #not_true style="width: 100%">
+                        <tbody>
+                            <tr class="break" >
+                                <td colspan="7">Break</td>
+                            </tr>
+                        </tbody>    
+                    </ng-template>
+                </ng-container>
+            </table>-->
+            <!--Below table for vertical period per day -->
+            <table class="card-body table table-bordered table-sm table-responsive">
+                 <thead class="card-header bg-secondary">
+                    <tr>
+                        <th>*</th>
+                        <th *ngFor="let head of tableHeader">{{head.PERIOD_NO}}</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    <tr>
+                        <td class="DAY">Monday</td>
+                        <ng-container *ngFor="let mon of monRow">
+                            <td *ngIf="mon.MON_SUB != '';else mon_break">{{mon.MON_SUB}}</td>
+                            <ng-template #mon_break style="width: 100%">
+                                <td class="break_td"></td>
+                            </ng-template>
+                        </ng-container>
+                    </tr>
+                    <tr>
+                        <td class="DAY">Tuesday</td>
+                        <ng-container *ngFor="let tue of tueRow">
+                            <td *ngIf="tue.TUE_SUB != '';else tue_break">{{tue.TUE_SUB}}</td>
+                            <ng-template #tue_break style="width: 100%">
+                                <td class="break_td">B</td>
+                            </ng-template>
+                        </ng-container>
+                        
+                    </tr>
+                    <tr>
+                        <td class="DAY">Wednesday</td>
+                        <ng-container *ngFor="let wed of wedRow">
+                            <td *ngIf="wed.WED_SUB != '';else wed_break">{{wed.WED_SUB}}</td>
+                            <ng-template #wed_break style="width: 100%">
+                                <td class="break_td">R</td>
+                            </ng-template>
+                        </ng-container>
+                        
+                    </tr>
+                    <tr>
+                        <td class="DAY">Thursday</td>
+                        <ng-container *ngFor="let thu of thuRow">
+                            <td *ngIf="thu.THU_SUB != '';else thu_break">{{thu.THU_SUB}}</td>
+                            <ng-template #thu_break style="width: 100%">
+                                <td class="break_td">E</td>
+                            </ng-template>
+                        </ng-container>
+                        
+                    </tr>
+                    <tr>
+                        <td class="DAY">Friday</td>
+                        <ng-container *ngFor="let fri of friRow">
+                            <td *ngIf="fri.FRI_SUB != '';else fri_break">{{fri.FRI_SUB}}</td>
+                            <ng-template #fri_break style="width: 100%">
+                                <td class="break_td">A</td>
+                            </ng-template>
+                        </ng-container>
+                        
+                    </tr>
+                    <tr>
+                        <td class="DAY">Saturday</td>
+                        <ng-container *ngFor="let sat of satRow">
+                            <td *ngIf="sat.SAT_SUB != '';else sat_break">{{sat.SAT_SUB}}</td>
+                            <ng-template #sat_break style="width: 100%">
+                                <td class="break_td">K</td>
+                            </ng-template>
+                        </ng-container>
+                       
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+            
+   
+</div>
+
+
+
+
+
+

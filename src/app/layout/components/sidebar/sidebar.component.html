@@ -1,0 +1,51 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
+        </a>
+        <a [routerLink]="['/homework']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-pencil-square-o"></i>&nbsp;{{ 'Homework' | translate }}
+        </a>
+        <a [routerLink]="['/timetable']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Time Table' | translate }}
+        </a>
+        <a [routerLink]="['/attendance']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-clock-o"></i>&nbsp;{{ 'Attendance' | translate }}
+        </a>
+        <a [routerLink]="['/bs-element']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-inr"></i>&nbsp;{{ 'Fees' | translate }}
+        </a>
+        <a [routerLink]="['/grid']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-comment "></i>&nbsp;{{ 'Teacher Remark' | translate }}
+        </a>
+        <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw  fa-bell "></i>&nbsp;{{ 'Notifications' | translate }}
+        </a>
+        <a [routerLink]="['/gallery']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-picture-o  "></i>&nbsp;{{ 'Gallery' | translate }}
+        </a>
+        <a [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw  fa-user"></i>&nbsp;{{ 'Profile' | translate }}
+        </a>
+        <!--<div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages')">
+                <span><i class="fa fa-plus"></i>&nbsp; {{ 'Menu' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>-->
+        
+        
+    </ul>
+</nav>

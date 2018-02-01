@@ -1,0 +1,11 @@
+.calenderView{
+    height: 100%;
+    max-height: 80% !important
+}
+.calenderView .cal-month-view{
+    padding-bottom: 20%;
+}
+
+.cal-month-view .cal-day-cell.cal-in-month.cal-has-events{
+    background: aquamarine !important;
+}

@@ -1,0 +1,21 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/eschool-logo.png" width="150px" class="" />
+            <h1>Parent Login</h1>
+            <form #LoginForm="ngForm" role="form">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" ngModel name="mobile" (keypress)="keyPress($event)" class="form-control input-underline input-lg" id="" placeholder="Mobile Number" minlength=10 maxlength=10>
+                        <div class="error-msg" ng-if="errorMessage"> {{ errorMessage }} </div>
+                    </div>
+
+                </div>
+                
+                <a class="btn rounded-btn" (click)="onLoggedin(LoginForm)"> Log in </a>
+                &nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+<div [@routerTransition]>
+    <app-page-header (childEvent)="test(message)" [heading]="'Homework'" [icon]="'fa-pencil-square-o'"></app-page-header>
+    
+    <div class="row">
+        <div class="card mb-3" style="width:100%">
+            <div class="card-header table-responsive"></div>
+            <table class="card-body table table-hover  table-bordered">
+                <thead class="card-header">
+                    <tr>
+                        <th>#</th>
+                        <th>Homework Date</th>
+                        <th>Subject</th>
+                        <th>Teacher</th>
+                        <th>Due date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{data.HOMEWORK_DATE}}</td>
+                            <td>{{data.SUBJECT}}</td>
+                            <td>{{data.TEACHER}}</td>
+                            <td>{{data.DUE_DATE}}</td>
+                            <td>
+                                <a href="javascript:void(0)" class="nav-link mt-1"
+                                style="padding: 0.375rem 1rem !important; border-color: rgb(204, 59, 59);"
+                                (click)="callDetails(data)">
+                                    Details
+                                </a>
+                            </td>
+                     </tr>
+                </tbody>
+                
+            </table>
+            <pagination-controls class="float-right" (pageChange)="p = $event"></pagination-controls>   
+        </div>
+            
+    </div>
+
+    <div class="backdrop" [ngStyle]="{'display':display}"></div>
+    
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    
+      <div class="modal-dialog modal-lg" role="document">
+    
+        <div class="modal-content">
+    
+          <div class="modal-header">
+            <h3 class="modal-title float-left">Homework</h3>
+            <button type="button" class="close float-right" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+          </div>
+    
+          <div class="modal-body">
+                <fieldset class="" >
+                        <div class="form-group row">
+                                <label class="col-3 col-form-label" for="disabledSelect">Homework Date</label>
+                                <div class="col-9">
+                                        <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled="" value="{{hDate}}">
+                                </div>
+                                
+                        </div>
+                        <div class="form-group row">
+                                <label class="col-3 col-form-label" for="disabledSelect">Subject</label>
+                                <div class="col-9">
+                                        <input class="form-control" id="disabledInput" type="text" value="{{hSub}}" placeholder="Disabled input" disabled="">
+                                </div>
+                                
+                        </div>
+                        <div class="form-group row">
+                                <label class="col-3 col-form-label" for="disabledSelect">Teacher</label>
+                                <div class="col-9">
+                                        <input class="form-control" id="disabledInput" type="text" value="{{hteacher}}" placeholder="Disabled input" disabled="">
+                                </div>
+                                
+                        </div>
+                        <div class="form-group row">
+                                <label class="col-3 col-form-label" for="disabledSelect">Due Date</label>
+                                <div class="col-9">
+                                        <input class="form-control" id="disabledInput" type="text" value="{{hduedate}}" placeholder="Disabled input" disabled="">
+                                </div>
+                                
+                        </div>
+                        <div class="form-group row">
+                                <label class="col-3 col-form-label" for="disabledSelect">Details</label>
+                                <div class="col-9">
+                                        <!--<input class="form-control" id="disabledInput" type="" placeholder="Disabled input" disabled="">-->
+                                        <textarea class="form-control" id="exampleTextarea" rows="3" value="{{hdetails}}" disabled=""></textarea>
+                                </div>
+                                
+                        </div>
+                        <div class="form-group row" *ngIf="hImageValid">
+                                <label class="col-3 col-form-label" for="disabledSelect">Attached Image</label>
+                                <div class="col-9"><u>
+                                        <!--<input class="form-control" id="disabledInput" type="" placeholder="Disabled input" disabled="">-->
+                                        <a href="javascript:void(0)" class="nav-link mt-1"
+                                        style="padding: 0.375rem 1rem !important; border-color: rgb(204, 59, 59);"
+                                        (click)="callImage();">
+                                            View Attached Image
+                                        </a></u>
+                                </div>
+                                
+                        </div>
+                </fieldset>
+            
+          </div>
+    
+          <div class="modal-footer">
+    
+            <button type="button" class="btn btn-secondary" (click)="onCloseHandled()" >Close</button>
+    
+          </div>
+    
+        </div><!-- /.modal-content -->
+    
+      </div><!-- /.modal-dialog -->
+    
+    </div><!-- /.modal !-->
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayImage}">
+        
+          <div class="modal-dialog modal-lg" role="document">
+        
+            <div class="modal-content">
+        
+              <div class="modal-header">
+                <h3 class="modal-title float-left">Attached Image</h3>
+                <button type="button" class="close float-right" aria-label="Close" (click)="onCloseImage()"><span aria-hidden="true">&times;</span></button>
+              </div>
+        
+              <div class="modal-body">
+                <fieldset class="" >
+                    <div class="form-group row" style="align-items: center">
+                            <img id="ImageDiv" src="" alt="" border="5" height="420" width="420"/>
+                    </div>
+                </fieldset>
+              </div>
+
+              <div class="modal-footer">
+                    
+                   <button type="button" class="btn btn-secondary" (click)="onCloseImage()" >Close</button>
+             </div>
+            </div>
+        </div>
+</div>
+
+
+
+
