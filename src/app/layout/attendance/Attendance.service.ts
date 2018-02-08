@@ -7,6 +7,7 @@ import { Component } from '@angular/core/src/metadata/directives';
 import { AttendanceModule } from './Attendance.module';
 import { concat } from 'rxjs/observable/concat';
 import { CalendarEvent } from 'angular-calendar';
+import {web_url} from '../../globalVar';
 interface attandence {
     TRDATE:string;
     ATTENDANCE_YN:string;
@@ -18,7 +19,7 @@ interface attandence {
 @Injectable()
 export class AttendanceService {
       events$: Observable<Array<CalendarEvent<{ film: attandence }>>>;
-    Url = "http://192.168.1.84:8090/api/getStudAtt";
+    Url = web_url + "getStudAtt";
     constructor(private http: Http, private http1: HttpClient) {
     }
     public callDataService(currStu: any,year: string,month:string):Observable<any>{

@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { Component } from '@angular/core/src/metadata/directives';
 import { HomeworkModule } from './homework.module';
 import { concat } from 'rxjs/observable/concat';
-
+import {web_url} from '../../globalVar';
 
 @Injectable()
 export class HomeworkService {	
-    homeworkUrl = "http://192.168.1.84:8090/api/getHomework";
+    homeworkUrl = web_url+"getHomework";
     constructor(private http: Http, private http1: HttpClient) {
     }
     public callDataService(currStu: any): Observable<any> {

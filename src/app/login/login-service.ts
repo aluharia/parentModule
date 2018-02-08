@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Component } from '@angular/core/src/metadata/directives';
-
+import {web_url} from '../globalVar';
 
 @Injectable()
 export class LoginService {	
-    loginUrl = "http://192.168.1.84:8090/api/login";
+    loginUrl = web_url+"login";
     constructor(private http: Http) {
     }
     public login(number: String): Observable<any> {
