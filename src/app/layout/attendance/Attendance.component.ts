@@ -59,7 +59,7 @@ export class AttendanceComponent implements OnInit {
    //initializing p to one FOR pagination
   p: number = 1;
   view: string = 'month';
-
+  currStuData:any;
   viewDate: Date = new Date();
 
   //events$: Observable<Array<CalendarEvent>>;
@@ -71,63 +71,69 @@ export class AttendanceComponent implements OnInit {
         this.data.currentStudent.subscribe(message => this.message = message)
         console.log("getting::"+this.message);
         
-        this.callData(JSON.parse(this.message),this.viewDate);
+        //this.callData(JSON.parse(this.message),this.viewDate);
+        this.currStuData =JSON.parse(this.message);
+        this.fetchDate();
         
     }
 
     // After StudentChange
     test(msg){ 
-        this.callData((msg),this.viewDate);
+        //this.callData((msg),this.viewDate);
+        this.currStuData = msg;
+        this.fetchDate();
        // console.log("INSIDE TEST::"+JSON.stringify(msg));
         }
-
+    fetchDate(){                                    // calling from directive change.
+              const getStart: any = {
+                month: startOfMonth,
+                week: startOfWeek,
+                day: startOfDay
+              }[this.view];
+          
+              const getEnd: any = {
+                month: endOfMonth,
+                week: endOfWeek,
+                day: endOfDay
+              }[this.view];
+              const year: any= format(getStart(this.viewDate), 'YYYY');
+              const month: any= format(getStart(this.viewDate), 'MM');
+              this.callingData(this.currStuData,year,month);
+        }
         
-    //For getting Table data.
-    callData(currStu: any,viewDate:any){
-      const getStart: any = {
-        month: startOfMonth,
-        week: startOfWeek,
-        day: startOfDay
-      }[this.view];
-  
-      const getEnd: any = {
-        month: endOfMonth,
-        week: endOfWeek,
-        day: endOfDay
-      }[this.view];
+    
 
-      const year: any= format(getStart(viewDate), 'YYYY');
-      const month: any= format(getStart(viewDate), 'MM')
-
+    callingData(currStu: any,year:any,month:any)          //for fetching data from service.
+    {
       //console.log("data_para::"+month);
-        this.stuData = currStu;
-        //console.log("InsideCalldata:::"+(currStu));
-       // this.events$ = ;
-       this.attendanceService.callDataService(currStu,year,month).subscribe(data=>{
-         //console.log(data)
-         this.events = [];
-         data.forEach(element => {
-           if(element.ATTENDANCE_YN === "Holiday")
-           {
-            this.events.push({
-              title: element.HOLIDAY_NAME,
-              start: new Date(element.TRDATE),
-              color: this.colors.blue
-            });
-           }
-           else if(element.ATTENDANCE_YN === "Absent")
-           {
-            this.events.push({
-              title: "Absent",
-              start: new Date(element.TRDATE),
-              color: this.colors.red
-            });
-           }
-           
-         })
-         this.refresh.next();
-       }) ;
-    } 
+      this.stuData = currStu;
+      //console.log("InsideCalldata:::"+(currStu));
+     // this.events$ = ;
+     this.attendanceService.callDataService(currStu,year,month).subscribe(data=>{
+       //console.log(data)
+       this.events = [];
+       data.forEach(element => {
+         if(element.ATTENDANCE_YN === "Holiday")
+         {
+          this.events.push({
+            title: element.HOLIDAY_NAME,
+            start: new Date(element.TRDATE),
+            color: this.colors.blue
+          });
+         }
+         else if(element.ATTENDANCE_YN === "Absent")
+         {
+          this.events.push({
+            title: "Absent",
+            start: new Date(element.TRDATE),
+            color: this.colors.red
+          });
+         }
+         
+       })
+       this.refresh.next();
+     });
+    }
     
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
       if (isSameMonth(date, this.viewDate)) {
