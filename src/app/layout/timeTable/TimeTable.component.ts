@@ -5,6 +5,7 @@ import {DataService } from '../../shared/services/index'
 import {TimeTableService} from './TimeTable.service'
 import { error } from 'selenium-webdriver';
 import {HttpErrorResponse} from '@angular/common/http';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
     selector: 'app-timeTable',
@@ -15,7 +16,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class TimeTableComponent implements OnInit {
     selectedName:any;
-    constructor(private zone:NgZone, PageHeaderModule : PageHeaderModule, private data:DataService, private timeTableService: TimeTableService) {
+    constructor(private zone:NgZone, PageHeaderModule : PageHeaderModule, private data:DataService, private timeTableService: TimeTableService,private spinnerService: Ng4LoadingSpinnerService) {
     }
    message:string;
    @Input() tableData:any;
@@ -34,15 +35,19 @@ export class TimeTableComponent implements OnInit {
    //initializing p to one FOR pagination
   p: number = 1;
     ngOnInit() {
+        this.spinnerService.show();
         this.data.currentStudent.subscribe(message => this.message = message)
         console.log("getting::"+this.message);
         
         this.callData(JSON.parse(this.message));
+        this.spinnerService.hide();
     }
 
     // After StudentChange
     test(msg){ 
+        this.spinnerService.show();
         this.callData((msg));
+        this.spinnerService.hide();
        // console.log("INSIDE TEST::"+JSON.stringify(msg));
         }
 

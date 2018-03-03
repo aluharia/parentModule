@@ -21,7 +21,7 @@ import {
   endOfDay,
   format
 } from 'date-fns';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 @Component({
     selector: 'app-attendance',
     templateUrl: './Attendance.component.html',
@@ -47,7 +47,7 @@ export class AttendanceComponent implements OnInit {
   };
 
     selectedName:any;
-    constructor(private http: HttpClient, private zone:NgZone, PageHeaderModule : PageHeaderModule, private data:DataService, private attendanceService: AttendanceService) {
+    constructor(private http: HttpClient, private zone:NgZone, PageHeaderModule : PageHeaderModule, private data:DataService, private attendanceService: AttendanceService,private spinnerService: Ng4LoadingSpinnerService) {
     }
    message:string;
    @Input() tableData:any;
@@ -72,16 +72,20 @@ export class AttendanceComponent implements OnInit {
         console.log("getting::"+this.message);
         
         //this.callData(JSON.parse(this.message),this.viewDate);
+        this.spinnerService.show();
         this.currStuData =JSON.parse(this.message);
         this.fetchDate();
+        this.spinnerService.hide();
         
     }
 
     // After StudentChange
     test(msg){ 
         //this.callData((msg),this.viewDate);
+        this.spinnerService.show();
         this.currStuData = msg;
         this.fetchDate();
+        this.spinnerService.hide();
        // console.log("INSIDE TEST::"+JSON.stringify(msg));
         }
     fetchDate(){                                    // calling from directive change.

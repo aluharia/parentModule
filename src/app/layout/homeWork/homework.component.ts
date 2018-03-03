@@ -5,6 +5,7 @@ import {DataService } from '../../shared/services/data.service'
 import {HomeworkService} from './homework.service'
 import { error } from 'selenium-webdriver';
 import {HttpErrorResponse} from '@angular/common/http';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
     selector: 'app-homework',
@@ -15,7 +16,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class HomeworkComponent implements OnInit {
     selectedName:any;
-    constructor(private zone:NgZone, PageHeaderModule : PageHeaderModule, private data:DataService, private homeService: HomeworkService) {
+    constructor(private zone:NgZone, PageHeaderModule : PageHeaderModule, private data:DataService, private homeService: HomeworkService,private spinnerService: Ng4LoadingSpinnerService) {
     }
     message:string;
    @Input() tableData:any;
@@ -35,14 +36,18 @@ export class HomeworkComponent implements OnInit {
    //initializing p to one FOR pagination
   p: number = 1;
     ngOnInit() {
+        this.spinnerService.show();
         this.data.currentStudent.subscribe(message => this.message = message)
         //console.log("getting::"+this.message);
         this.callData(JSON.parse(this.message));
+        this.spinnerService.hide();
     }
 // After StudentChange
     test(msg){
+        this.spinnerService.show();
         this.callData((msg));
        // console.log("INSIDE TEST::"+JSON.stringify(msg));
+       this.spinnerService.hide();
         }
 
     callDetails(data:any)
